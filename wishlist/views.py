@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from django.shortcuts import render
+from requests import Response
 from wishlist.models import BarangWishlist
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
@@ -88,14 +89,13 @@ def logout_user(request):
 @login_required(login_url='/wishlist/login/')
 @csrf_exempt
 def add_wishlist(request):
-    print('masuk')
     if request.method == 'POST':
-        print('masuk')
         nama_barang = request.POST.get('nama_barang')
         harga_barang = request.POST.get('harga_barang')
         deskripsi = request.POST.get('deskripsi')
 
         new_wishlist = BarangWishlist.objects.create(nama_barang=nama_barang,deskripsi=deskripsi,harga_barang=harga_barang)
         new_wishlist.save()
+        return Response
         
-        return render(request, 'wishlist_ajax.html')
+    return render(request, 'wishlist_ajax.html')

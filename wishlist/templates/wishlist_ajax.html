@@ -7,6 +7,9 @@
     <script>
         $(document).ready(function () {
             loadData();
+            $('.submit_barang').click(function () {
+                $.post('http://127.0.0.1:8000/wishlist/add', { nama_barang: $("#nama_barang").val(), harga_barang: parseInt($("#harga_barang").val()), deskripsi: b$("#deskripsi").val() })
+            });
         });
 
         function loadData() {
@@ -16,12 +19,6 @@
                 }
             });
         }
-
-        $(document).ready(function () {
-            $('.submit_barang').click(function () {
-                $.post('http://127.0.0.1:8000/wishlist/add', { nama_barang: $("#nama_barang").val(), harga_barang: parseInt($("#harga_barang").val()), deskripsi: b$("#deskripsi").val() })
-            });
-        });
     </script>
 </head>
 
